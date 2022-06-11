@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Регіони
+{% endblock %}
+
+{% block content %}
+    <h1>Регіони</h1>
+<div>
+    {% for region in Regions %}
+        <div>
+            <img src="{{ region.images.url }}" width = 150>
+        </div>
+        <div>
+            <a href="region/{{ region.id }}">{{ region.title }}</a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

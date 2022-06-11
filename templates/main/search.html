@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+    {% if searched %}
+        <h1>You searched For {{ searched }}</h1>
+        {% for attraction in attractions %}
+            <div>
+                {{ attraction.title }}
+            </div>
+
+            <div>
+                <img src="{{ attraction.images.url }}" width = 150>
+            </div>
+            <div>
+                {{ attraction.description}}
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>Hey! You Forgot to search</h1>
+    {% endif %}
+
+{% endblock %}

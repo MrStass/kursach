@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+   {% for country in Countries %}
+            <div>
+                <img src="{{ country.images.url }}" width = 150>
+            </div>
+            <div>
+                <a href="{% url 'attractions:attractions' attractions_id=country.id %}">{{ country.title }}</a>
+            </div>
+   {% endfor %}
+
+{% endblock %}

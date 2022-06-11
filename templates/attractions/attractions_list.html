@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+   {% for attraction in Attractions %}
+            <div>
+                {{ attraction.title }}
+            </div>
+
+            <div>
+                <img src="{{ attraction.images.url }}" width = 150>
+            </div>
+            <div>
+                {{ attraction.description}}
+            </div>
+   {% endfor %}
+
+{% endblock %}
