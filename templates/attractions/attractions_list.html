@@ -8,10 +8,15 @@
             </div>
 
             <div>
-                <img src="{{ attraction.images.url }}" width = 150>
+                <img src="{{ attraction.images.url }}" width = 300>
             </div>
             <div>
-                {{ attraction.description}}
+                <p class="text-justify">{{ attraction.description}}</p>
+            </div>
+            <div id="favourite-section">
+            <a href="#">
+               <i class="fa-regular fa-heart"></i>
+            </a>
             </div>
    {% endfor %}
 

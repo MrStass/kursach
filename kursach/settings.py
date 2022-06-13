@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main',
     'attractions',
     'crispy_forms',
+    'about_us',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Регіони
+{% endblock %}
+
+{% block content %}
+    <h1>Автори</h1>
+<div>
+    {% for person in About_us %}
+        <div>
+            <h4>Ім'я: {{ person.name }}</h4>
+        </div>
+        <div>
+            <img src="{{ person.images.url }}" width = 200>
+        </div>
+        <div>
+            <p>Тип: {{ person.type}}</p>
+        </div>
+        <div>
+            <p>Мотивація: {{ person.motivation }}</p>
+        </div>
+       <div>
+            <p>Локація: {{ person.position }}</p>
+       </div>
+        <div>
+            <p>Якості: {{ person.power }}</p>
+        </div>
+
+        <div>
+            <p>Слабкості: {{ person.weaknesses }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

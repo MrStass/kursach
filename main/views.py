@@ -13,8 +13,8 @@ def CountriesView(request, country_id):
 def SearchView(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        attractions_by_name = Attractions.objects.filter(title__iexact=searched)
-        attractions_by_country = Attractions.objects.filter(country__title__iexact=searched)
+        attractions_by_name = Attractions.objects.filter(title__icontains=searched)
+        attractions_by_country = Attractions.objects.filter(country__title__icontains=searched)
         return render(request, 'main/search.html', {'searched': searched, 'attractions':  attractions_by_name if attractions_by_name else attractions_by_country})
     else:
         return render(request, 'main/search.html', {})

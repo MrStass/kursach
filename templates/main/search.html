@@ -3,7 +3,7 @@
 {% block content %}
 
     {% if searched %}
-        <h1>You searched For {{ searched }}</h1>
+        <h1>Результат пошуку: {{ searched }}</h1>
         {% for attraction in attractions %}
             <div>
                 {{ attraction.title }}

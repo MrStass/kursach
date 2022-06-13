@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -77,3 +77,4 @@ def password_reset_request(request):
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="users/password/password_reset.html",
                   context={"password_reset_form": password_reset_form})
+
