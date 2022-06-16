@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Add comment
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Add comment</h1>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.text }}
+                <button class="btn btn-secondaty">
+                    Add comment
+                </button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

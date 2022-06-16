@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from .models import Region, Country
 from django.shortcuts import render
 from attractions.models import Attractions
@@ -7,7 +8,11 @@ def IndexView(request):
 
 
 def CountriesView(request, country_id):
-    return render(request, "main/countries.html", {"Countries": Country.objects.filter(region=country_id)})
+    p = Paginator(Country.objects.filter(region=country_id), 4)
+    page = request.GET.get('page')
+    countries = p.get_page(page)
+    return render(request, "main/countries.html", {"Countries": countries})
+
 
 
 def SearchView(request):

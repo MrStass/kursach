@@ -2,13 +2,36 @@
 
 {% block content %}
 
-   {% for country in Countries %}
-            <div>
-                <img src="{{ country.images.url }}" width = 150>
-            </div>
-            <div>
-                <a href="{% url 'attractions:attractions' attractions_id=country.id %}">{{ country.title }}</a>
-            </div>
-   {% endfor %}
+<div class="row row-cols-2 row-cols-md-2 g-4">
 
+        {% for country in Countries %}
+            <div>
+                <div>
+                    <img src="{{ country.images.url }}" width = 350 height = 200>
+                 </div>
+                <div>
+                    <a href="{% url 'attractions:attractions' attractions_id=country.id %}">{{ country.title }}</a>
+                </div>
+            </div>
+        {% endfor %}
+
+</div>
+
+<div>
+<nav class="d-flex justify-content-center" aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if Countries.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ Countries.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        <li class="page-item"><a href="#" class="page-link"> Page {{ Countries.number }} of {{ Countries.paginator.num_pages }}</a></li>
+
+        {% if Countries.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ Countries.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ Countries.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+</div>
 {% endblock %}

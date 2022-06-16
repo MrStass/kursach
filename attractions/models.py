@@ -8,6 +8,7 @@ class Attractions(models.Model):
     images = models.ImageField('Зображення', upload_to="attractions/")
     description = models.TextField('Опис')
 
+
     def __str__(self) -> str:
         return self.title
 
@@ -17,7 +18,13 @@ class Attractions(models.Model):
 
 
 class Comments(models.Model):
-    country = models.ForeignKey(Attractions, on_delete=models.CASCADE, blank=True, null=True)
+    attraction = models.ForeignKey(Attractions, on_delete=models.CASCADE, blank=True, null=True, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Власник коментаря', blank=True, null=True)
     text = models.TextField('Коментар')
-    status = models.BooleanField('')
+
+    def __str__(self):
+        return '%s - %s' % (self.attraction, self.author)
+
+    class Meta:
+        verbose_name = "Коментар"
+        verbose_name_plural = "Коментарі"
