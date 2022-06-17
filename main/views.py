@@ -3,6 +3,7 @@ from .models import Region, Country
 from django.shortcuts import render
 from attractions.models import Attractions
 
+
 def IndexView(request):
     return render(request, "main/index.html", {"Regions": Region.objects.all()})
 
@@ -12,7 +13,6 @@ def CountriesView(request, country_id):
     page = request.GET.get('page')
     countries = p.get_page(page)
     return render(request, "main/countries.html", {"Countries": countries})
-
 
 
 def SearchView(request):

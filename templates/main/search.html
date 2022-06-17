@@ -4,44 +4,47 @@
 
     {% if searched %}
         <h1>Результат пошуку: {{ searched }}</h1>
+        <br/>
         {% for attraction in attractions %}
             <div class="t2">
-                {{ attraction.title }}
-            </div>
-            <br/>
-            <div>
-                <div class="text1">
-                    <img class="img-fluid rounded" src="{{ attraction.images.url }}" width = 100%>
-                </div>
-                <div>
-                    <p class="text-justify">{{ attraction.description}}</p>
-                </div>
-            </div>
-            <div>
-                <h4>Comments...</h4>
-                <div class="t6">
-                    {% if not attraction.comments.all %}
-                        {% if user.is_authenticated %}
-                            No comments yet...<a href="{% url 'attractions:add_comment' attraction.pk%}">add one</a>
-                        {% else %}
-                            No comments yet...Please login for adding comments
-                        {% endif %}
-                    {% else %}
-                        {% for coment in attraction.comments.all %}
-                            <strong>Author: {{ coment.author }}</strong>
-                            <br/>
-                            <div>Comment: {{ coment.text }}</div>
-                            <hr>
-                        {% endfor %}
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'attractions:add_comment' attraction.pk %}">Add comment</a>
-                        {% else %}
-                            Please login for adding comments
-                        {% endif %}
-                    {% endif %}
-                </div>
-            <br/>
-            </div>
+           {{ attraction.title }}
+       </div>
+       <br/>
+       <div>
+           <div class="text1">
+               <img class="img-fluid rounded" src="{{ attraction.images.url }}" width = 100%>
+           </div>
+           <div>
+               <p class="text-justify">{{ attraction.description}}</p>
+           </div>
+       </div>
+
+       <div class="comments"><h4>Comments...</h4></div>
+       <div class="comments">
+
+           <div>
+               {% if not attraction.comments.all %}
+                   {% if user.is_authenticated %}
+                       Ще немає коментарів...<a href="{% url 'attractions:add_comment' attraction.pk%}">Додати</a>
+                   {% else %}
+                       Ще немає коментарів...Будь ласка, увійдіть, щоб додати коментар
+                   {% endif %}
+               {% else %}
+                   {% for coment in attraction.comments.all %}
+                       <strong>Автор: {{ coment.author }}</strong>
+                       <br/>
+                       <div>Коментар: {{ coment.text }}</div>
+                       <hr>
+                   {% endfor %}
+                   {% if user.is_authenticated %}
+                       <a href="{% url 'attractions:add_comment' attraction.pk %}">Додати коментар</a>
+                   {% else %}
+                       Будь ласка, увійдіть для додавання коментарів
+                   {% endif %}
+               {% endif %}
+           </div>
+       </div>
+       <br/>
         {% endfor %}
     {% else %}
         <h1>Hey! You Forgot to search</h1>

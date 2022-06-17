@@ -8,7 +8,6 @@ class Attractions(models.Model):
     images = models.ImageField('Зображення', upload_to="attractions/")
     description = models.TextField('Опис')
 
-
     def __str__(self) -> str:
         return self.title
 
