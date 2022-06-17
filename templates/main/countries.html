@@ -5,16 +5,15 @@
 <div class="row row-cols-2 row-cols-md-2 g-4">
 
         {% for country in Countries %}
-            <div>
-                <div>
-                    <img src="{{ country.images.url }}" width = 350 height = 200>
+            <div class="col">
+                <div class="hig">
+                    <img class="img-fluid rounded" src="{{ country.images.url }}">
                  </div>
                 <div>
                     <a href="{% url 'attractions:attractions' attractions_id=country.id %}">{{ country.title }}</a>
                 </div>
             </div>
         {% endfor %}
-
 </div>
 
 <div>

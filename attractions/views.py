@@ -1,4 +1,3 @@
-from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import CommentForm
@@ -7,10 +6,7 @@ from django.shortcuts import render, redirect
 
 
 def AttractionsView(request, attractions_id):
-    p = Paginator(Attractions.objects.filter(country=attractions_id), 3)
-    page = request.GET.get('page')
-    attractions = p.get_page(page)
-    return render(request, "attractions/attractions_list.html", {"Attractions": attractions})
+    return render(request, "attractions/attractions_list.html", {"Attractions": Attractions.objects.filter(country=attractions_id)})
 
 
 class AddCommentView(CreateView):
@@ -26,8 +22,3 @@ class AddCommentView(CreateView):
         form_u.save()
         return super().form_valid(form)
 
-
-#def delete_comment(request, comment_id):
-    #comment = Comments.objects.get(pk=comment_id)
-   # comment.delete()
-   # return redirect()

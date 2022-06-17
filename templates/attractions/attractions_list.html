@@ -6,53 +6,39 @@
             <div class="t2">
                 {{ attraction.title }}
             </div>
+            <br/>
             <div>
                 <div class="text1">
-                    <img src="{{ attraction.images.url }}" width = 800 height = 600>
+                    <img class="img-fluid rounded" src="{{ attraction.images.url }}" width = 100%>
                 </div>
                 <div>
                     <p class="text-justify">{{ attraction.description}}</p>
                 </div>
             </div>
-            <h4>Comments...</h4>
-            <div class="t6">
-                {% if not attraction.comments.all %}
-                    {% if user.is_authenticated %}
-                        No comments yet...<a href="{% url 'attractions:add_comment' attraction.pk%}">add one</a>
+            <div>
+                <h4>Comments...</h4>
+                <div class="t6">
+                    {% if not attraction.comments.all %}
+                        {% if user.is_authenticated %}
+                            No comments yet...<a href="{% url 'attractions:add_comment' attraction.pk%}">add one</a>
+                        {% else %}
+                            No comments yet...Please login for adding comments
+                        {% endif %}
                     {% else %}
-                        No comments yet...Please login for adding comments
+                        {% for coment in attraction.comments.all %}
+                            <strong>Author: {{ coment.author }}</strong>
+                            <br/>
+                            <div>Comment: {{ coment.text }}</div>
+                            <hr>
+                        {% endfor %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'attractions:add_comment' attraction.pk %}">Add comment</a>
+                        {% else %}
+                            Please login for adding comments
+                        {% endif %}
                     {% endif %}
-                {% else %}
-                    {% for coment in attraction.comments.all %}
-                        <strong>Author: {{ coment.author }}</strong>
-                        <br/>
-                        <div>Comment: {{ coment.text }}</div>
-                        <hr>
-                    {% endfor %}
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'attractions:add_comment' attraction.pk %}">Add comment</a>
-                    {% else %}
-                        Please login for adding comments
-                    {% endif %}
-                {% endif %}
-            </div>
+                </div>
             <br/>
+            </div>
    {% endfor %}
-<div>
-<nav  class="d-flex justify-content-center" aria-label="Page navigation example">
-    <ul class="pagination">
-        {% if Attractions.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ Attractions.previous_page_number }}">Previous</a></li>
-        {% endif %}
-
-        <li class="page-item disabled"><a href="#" class="page-link"> Page {{ Attractions.number }} of {{ Attractions.paginator.num_pages }}</a></li>
-
-        {% if Attractions.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ Attractions.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ Attractions.paginator.num_pages }}">Last &raquo;</a></li>
-        {% endif %}
-    </ul>
-</nav>
-</div>
 {% endblock %}
